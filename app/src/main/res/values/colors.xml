@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1692e6</color>
+    <color name="colorPrimaryDark">#1692e6</color>
+    <color name="colorAccent">#1692e6</color>
+
+    <color name="windowBackground">#e7e7e7</color>
+    <color name="popupBackground">#33000000</color>
+    <color name="nullBackground">#00ffffff</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="divider">#d3d3d3</color>
+    <color name="red">#e31436</color>
+
+    <color name="login_submit_start">#1692e6</color>
+    <color name="login_submit_end">#2bc4db</color>
+    <color name="app_main">#1692e6</color>
+    <color name="title_back">#666666</color>
+    <color name="table_title">#666666</color>
+
+    <color name="chart_noup">#FF0033</color>
+    <color name="chart_up">#009933</color>
+    <color name="chart_reup">#FFCC00</color>
+
+    <color name="chart_in">#009933</color>
+    <color name="chart_out">#FFCC00</color>
+    <color name="chart_back">#FF0033</color>
+
+</resources>

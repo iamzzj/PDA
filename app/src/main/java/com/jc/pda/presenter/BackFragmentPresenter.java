@@ -1,0 +1,189 @@
+package com.jc.pda.presenter;
+
+import android.content.Context;
+
+import com.jc.pda.database.helper.BillHelper;
+import com.jc.pda.database.helper.DealerHelper;
+import com.jc.pda.entity.Bill;
+import com.jc.pda.entity.BillCharts;
+import com.jc.pda.entity.Dealer;
+import com.jc.pda.entityEventBus.DownLoadSuccess;
+import com.jc.pda.presenter.view.BackFragmentView;
+import com.jc.pda.utils.Constant;
+import com.jc.pda.utils.TimeUtils;
+import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+/**
+ * Created by z on 2018/1/4.
+ */
+
+public class BackFragmentPresenter {
+    private Context context;
+    private BackFragmentView backFragmentView;
+
+    @Inject
+    public BackFragmentPresenter(Context context, BackFragmentView backFragmentView) {
+        this.context = context;
+        this.backFragmentView = backFragmentView;
+
+        EventBus.getDefault().register(this);
+    }
+
+    public void getAllBills(){
+        Observable.create(new ObservableOnSubscribe<List<Bill>>() {
+
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<List<Bill>> e) throws Exception {
+                Logger.i(backFragmentView.getDealerId());
+                List<Bill> bills = BillHelper.getSingleton(context).getBills(Constant.BACK,backFragmentView.getTime(),backFragmentView.getDealerId());
+                e.onNext(bills);
+                e.onComplete();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Bill>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<Bill> bills) {
+                        backFragmentView.setBills(bills);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getBillCount(){
+        Observable.create(new ObservableOnSubscribe<BillCharts>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<BillCharts> e) throws Exception {
+                List<String> dates = new ArrayList<String>();
+                for(int i =6 ;i >=0;i--){
+                    dates.add(TimeUtils.getYesterday(backFragmentView.getTime(),i));
+                }
+                Logger.i(dates.toString());
+
+                List<Integer> noUpBillCounts = new ArrayList<Integer>();
+                List<Integer> upBillCounts= new ArrayList<Integer>();
+                List<Integer> reUpBillCounts= new ArrayList<Integer>();
+
+                for (String date : dates){
+                    noUpBillCounts.add(BillHelper.getSingleton(context).getBillCount(date,Constant.BACK,Constant.FISTUP,false));
+                    upBillCounts.add(BillHelper.getSingleton(context).getBillCount(date,Constant.BACK,Constant.FISTUP,true));
+                    reUpBillCounts.add(BillHelper.getSingleton(context).getBillCount(date,Constant.BACK,Constant.REUP,true));
+                }
+
+                BillCharts bc = new BillCharts(dates,noUpBillCounts,upBillCounts,reUpBillCounts);
+                e.onNext(bc);
+                e.onComplete();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BillCharts>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BillCharts billCharts) {
+                        backFragmentView.setBillCharts(billCharts);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getDealers(){
+        Observable.create(new ObservableOnSubscribe<List<Dealer>>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<List<Dealer>> e) throws Exception {
+                List<Dealer> dealers = new ArrayList<Dealer>();
+                List<Dealer> dealersCache = DealerHelper.getSingleton(context).getDealers();
+                dealers.add(new Dealer("","全部"));
+                for(Dealer dealer : dealersCache){
+                    dealers.add(dealer);
+                }
+                e.onNext(dealers);
+                e.onComplete();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Dealer>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<Dealer> dealers) {
+                        List<String> ops = new ArrayList<String>();
+                        if(dealers != null && dealers.size()>0){
+                            for (Dealer dealer : dealers){
+                                ops.add(dealer.getDealerName());
+                            }
+                        }
+                        backFragmentView.setDealers(ops,dealers);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void downLoadSuccess(DownLoadSuccess downLoadSuccess) {
+        getDealers();
+    }
+
+    public void unregister(){
+        EventBus.getDefault().unregister(this);
+    }
+}

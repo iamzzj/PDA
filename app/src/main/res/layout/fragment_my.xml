@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_my"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <!--
+        enterAlways  下拉标题会下拉  标题有最小高度
+        enterAlwaysCollapsed   下拉标题不会下拉   标题没有最小高度
+        exitUntilCollapsed   下拉标题不会下拉   标题有最小高度
+
+        CollapsingToolbarLayout
+                    可以通过app:contentScrim设置折叠时工具栏布局的颜色，
+                    通过app:statusBarScrim设置折叠时状态栏的颜色。
+                    默认contentScrim是colorPrimary的色值，
+        statusBarScrim是colorPrimaryDark的色值。这个后面会用到
+         -->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/ctl_my"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!--封面图片-->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/fragment_my_top"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/logo"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <!-- app:navigationIcon="?attr/homeAsUpIndicator" -->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tbar_my"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:layout_collapseMode="pin" >
+
+                <!--<TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="01"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>-->
+
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_my_download_data"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:padding="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/my_download" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:text="下载资料"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_statistical"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="6dp">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:padding="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/my_statistical" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:text="统计数据"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_about"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:padding="6dp">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:padding="2dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/my_about" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:text="关于本机"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_my_login_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/abl_my"
+        android:layout_margin="18dp"
+        app:backgroundTint="@color/white"
+        app:borderWidth="0dp"
+        app:rippleColor="@color/white"
+        app:layout_anchorGravity="bottom|end"
+        android:src="@mipmap/fragment_my_login_out" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.jc.pda.view.W2HLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <com.jc.pda.view.H2WLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="4">
+
+            <ImageView
+                android:id="@+id/iv_woek_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:src="@mipmap/ic_launcher" />
+
+        </com.jc.pda.view.H2WLinearLayout>
+
+        <TextView
+            android:id="@+id/tv_woek_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00"
+            android:textColor="@color/black" />
+
+    </com.jc.pda.view.W2HLinearLayout>
+
+
+</LinearLayout>

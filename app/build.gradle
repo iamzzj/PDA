@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        applicationId "com.jc.pda"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile files('libs/glide-3.7.0.jar')
+    compile files('libs/ksoap2-android-3.1.0.jar')
+    compile files('libs/ScannerInterface.jar')
+    compile files('libs/badgeview.jar')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+
+
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'com.daimajia.numberprogressbar:library:1.4@aar'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:percent:25.3.1'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.google.dagger:dagger:2.11'
+    compile 'com.google.dagger:dagger-android:2.11'
+    compile 'com.google.dagger:dagger-android-support:2.11'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'com.orhanobut:logger:2.1.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.github.GrenderG:Toasty:1.2.5'
+    compile 'com.gyf.barlibrary:barlibrary:2.3.0'
+    compile 'cn.pedant.sweetalert:library:1.3'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'co.lujun:androidtagview:1.1.4'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
+    compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+    compile 'com.youth.banner:banner:1.4.10'
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
+    compile 'com.github.zcweng:switch-button:0.0.3@aar'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'me.dm7.barcodescanner:zxing:1.9.8'
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.liulishuo.filedownloader:library:1.6.9'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+}

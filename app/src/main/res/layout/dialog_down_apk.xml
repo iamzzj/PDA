@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_down_apk_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="正在下载"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/npb_down_apk_dialog_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:progress_max="100"
+        android:layout_marginBottom="10dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:id="@+id/tv_down_apk_dialog_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="确认"
+            android:textColor="@color/app_main"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_down_apk_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="bottom"
+            android:text="取消"
+            android:textColor="@color/app_main"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

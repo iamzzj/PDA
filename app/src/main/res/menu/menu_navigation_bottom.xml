@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_navigation_work"
+        android:title="工作"
+        android:icon="@mipmap/menu_work"
+        />
+    <item
+        android:id="@+id/menu_navigation_table"
+        android:title="报表"
+        android:icon="@mipmap/menu_table"
+        />
+    <item
+        android:id="@+id/menu_navigation_my"
+        android:title="我的"
+        android:icon="@mipmap/menu_my"
+        />
+
+</menu>
